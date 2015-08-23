@@ -1,2 +1,3 @@
 # self_learning
-self-learned courses
+
+This is my personal self-learning collection.
