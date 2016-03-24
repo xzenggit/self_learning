@@ -13,7 +13,7 @@ def gcd(a, b):
 '''
 def gcd(a, b):
     '''Use Euclid method to calcualte GCD '''
-    if b = 0:
+    if b == 0:
         return a
     ap = a % b
     return gcd(b, ap)
