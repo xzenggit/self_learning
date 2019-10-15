@@ -12,5 +12,6 @@ This is my personal self-learning collections.
 * Machine Learning for Trading at Udacity
 * Data Science at Scale at Coursera
 * Database notes collection
-* Algorith notes collection
+* Algorithm notes collection
 * Python notes collection
+* Statistics summaries
