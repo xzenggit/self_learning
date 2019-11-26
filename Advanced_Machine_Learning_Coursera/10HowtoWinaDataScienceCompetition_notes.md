@@ -240,8 +240,52 @@ Examined ensemble methods:
     - number of estimators, input model
   - Residual based (most successful algorithms): add residuals as another feature, and then add new prediction to old prediction.
     - XGboost, lightGBM, CatBoost, sklearn's GBM.
-* Stacking: make predictions of a number of models in a hold-out set and then using a different (Meta) model to train on these predictions.
-* StackNet
+Stacking:
+* Split the train set into two disjoint sets
+* Train several base learners on the 1st part
+* Make predictions with the base learners on the 2nd part
+* Use the predictions from above as input to train a higher level model
+* Diversity may come from different algorithms or input features
+* Performance plateaues after N models
+* Meta model is normally modest
+
+StackNet: a scalable meta modeling method that utilizes stacking to combine multiple models in a neural network architecture of multiple levels.
+
+* In a neural network, every node is a simple linear model with some nonlinear transformation.
+* Instead of a linear model, we could use any model.
+
+
+### Ensembling tips and tricks
+
+1st level tips:
+* Diversity based on algorithms
+  - 2-3 gradient boosted trees (lightgbm, xgboost catboost)
+  - 2-3 neural nets (keras, pytorch)
+  - 1-2 extratrees/randomforest(sklearn)
+  - 1-2 linear models as in logistic/ride or lasso (sklearn)
+  - 1-2 knn models (sklearn)
+  - 1 factorization machine (libfm)
+  - 1 svm with nonlinear kernel if size/memory allows (sklearn)
+* Diversity based on input data:
+  - categorical features: one hot, label encoding, target encoding
+  - numerical features: outliers, binning, derivatives, percentiles
+  - interactions: col1*/+-col2, groupby, unsupervised
+
+Subsequent level tips:
+* Simpler (or shallower) algorithms:
+    - gradient boosted trees with small depth (e.g. 2 or 3)
+    - linear models with high regularization
+    - extra trees
+    - shallow networks (e.g. 1 hidden layer)
+    - knn with BrayCutis Distance
+    - Brute forcing a search for best linear weights based on cv
+* Feature engineering:
+   - pairwise differences between meta features
+   - row-wise statistics like averages or stds
+   - standard feature selection techniques
+* For every 7.5 modles in previous level we add 1 in meta
+* Be mindful of target leakage
+* Software: StackNet 
 
 ```Python
 # Example of Bagging in SKLEARN
