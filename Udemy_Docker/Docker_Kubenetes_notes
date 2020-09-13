@@ -1,0 +1,4 @@
+
+## 02 Manipulating Containers with the Docker Client
+
+`docker start -a docker_ID`. Here `-a` means watch output of the docker container and print it out.
